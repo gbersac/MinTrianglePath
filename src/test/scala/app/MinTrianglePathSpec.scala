@@ -70,7 +70,7 @@ class ParseSpec extends AnyFlatSpec with Matchers {
     Triangle(input) match {
       case t @ TriangleNode(_, _, _) => 
         print("For solution ")
-        val res = time { Triangle.findMinPath(t) } // we are just testing if the program finish at all
+        val res = time { Triangle.findMinPath(t) }
         res shouldEqual List(
           74, 54, 80, 32, 23, 43, 51, 18, 31, 33, 25, 12, 18, 11, 35, 16, 12, 30, 14, 39, 77, 11, 79, 12, 30
         ) // = 860
