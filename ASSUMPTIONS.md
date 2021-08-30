@@ -1,0 +1,1 @@
+1- I made the assumption that the input was always correct and there is always at least one line.
