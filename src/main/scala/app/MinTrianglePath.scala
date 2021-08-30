@@ -24,22 +24,25 @@ object Triangle {
     loop(0, 0, None)
   }
 
-  def findMinPath(triangle: TriangleNode): List[Long] = {
-    // that mutable map does not break functionnal programming principle because the function is still pure
+  def findMinPath(root: TriangleNode): List[Long] = {
+    // that mutable map does not break functionnal programming principles because the function is still pure
     val computed: MMap[TriangleNode, List[Long]] = MMap.empty
-    def loop(triangle: TriangleNode): List[Long] =
-      if (computed.contains(triangle)) computed(triangle)
+    
+    def loop(triangle: TriangleNode, parents: List[Long], bestSoFar: Long = Long.MaxValue): List[Long] = {
+      if (computed.contains(triangle)) parents ++ computed(triangle)
+      else if (parents.sum + triangle.value > bestSoFar) parents :+ triangle.value
       else (triangle.left, triangle.right) match {
         case (left @ TriangleNode(_, _, _), right @ TriangleNode(_, _, _)) =>
-          val l, lp = loop(left)
-          val r, rp = loop(right)
-          val res = if (lp.sum < rp.sum) triangle.value :: lp else triangle.value :: rp
-          computed.addOne((triangle, res))
+          val l, lp = loop(left, parents :+ triangle.value)
+          val r, rp = loop(right, parents :+ triangle.value, lp.sum)
+          val res = if (lp.sum < rp.sum) lp else rp
+          computed.addOne((triangle, res.drop(parents.length)))
           res
         case _ =>
-          List(triangle.value)
+          parents :+ triangle.value
       }
-    loop(triangle)
+    }
+    loop(root, List())
   }
 
 }
