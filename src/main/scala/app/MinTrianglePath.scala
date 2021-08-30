@@ -63,7 +63,7 @@ object MinTrianglePath extends App {
       // 3- find the minimal path
       val path = Triangle.findMinPath(t)
       // 4- print the minimal path to stdout
-      println(path.mkString(" + ") + s" = ${path.sum}")
+      println("Minimal path is: " + path.mkString(" + ") + s" = ${path.sum}")
     case _ =>
       println("Input error")
   }
