@@ -23,14 +23,16 @@ object Triangle {
     loop(0, 0)
   }
 
-  /*
-  def findMinPath(triangle: TriangleNode): List[Int] = {
-    if (Triangle.left != TriangleEnd && Triangle.right != TriangleEnd) {
-      val l, lp = findMinPath()
-
+  def findMinPath(triangle: TriangleNode): List[Int] = 
+    (triangle.left, triangle.right) match {
+      case (left @ TriangleNode(_, _, _), right @ TriangleNode(_, _, _)) =>
+        val l, lp = findMinPath(left)
+        val r, rp = findMinPath(right)
+        if (lp.sum < rp.sum) triangle.value :: lp
+        else triangle.value :: rp
+      case _ =>
+        List(triangle.value)
     }
-    else List(Triangle.value)
-  }*/
 
 }
 
@@ -47,8 +49,14 @@ object MinTrianglePath extends App {
   // 2- parse as a binary Triangle
   val triangle = Triangle(input)
 
-  // 3- find the minimal path
-
-  // 4- print the minimal path to stdout
+  triangle match {
+    case t @ TriangleNode(_, _, _) => 
+      // 3- find the minimal path
+      val path = Triangle.findMinPath(t)
+      // 4- print the minimal path to stdout
+      path.mkString(" + ") + s" = ${path.sum}"
+    case _ =>
+      println("Input error")
+  }
 
 }
