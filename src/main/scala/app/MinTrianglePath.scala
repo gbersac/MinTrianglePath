@@ -41,12 +41,10 @@ object MinTrianglePath extends App {
   // 1- read from stdin - I made the assumption that the input is always correct
   val input: Seq[Seq[Int]] = Iterator.continually(readLine)
     .takeWhile(_ != null)
-    .mkString("\n")
-    .split("\n")
     .map(s => s.split(" ").map(_.toInt).toList)
     .toList
 
-  // 2- parse as a binary Triangle
+  // 2- parse as a triangle
   val triangle = Triangle(input)
 
   triangle match {
@@ -54,7 +52,7 @@ object MinTrianglePath extends App {
       // 3- find the minimal path
       val path = Triangle.findMinPath(t)
       // 4- print the minimal path to stdout
-      path.mkString(" + ") + s" = ${path.sum}"
+      println(path.mkString(" + ") + s" = ${path.sum}")
     case _ =>
       println("Input error")
   }
