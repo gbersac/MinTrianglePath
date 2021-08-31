@@ -28,11 +28,11 @@ class ParseSpec extends AnyFlatSpec with Matchers {
 
   "Triangle.findMinPath" should "work as expected" in {
     Triangle(exampleList) match {
-      case t @ TriangleNode(_, _, _) => 
+      case t @ TriangleNode(_, _, _) =>
         Triangle.findMinPath(t) shouldEqual List(7, 6, 3, 2)
       case _ =>
         fail("Parsing error")
-    }    
+    }
   }
 
   def time[R](block: => R): R = {
@@ -50,11 +50,11 @@ class ParseSpec extends AnyFlatSpec with Matchers {
       .toList
 
   "Triangle.findMinPath" should "work as expected even for a 15 line input" in {
-    println("For a 15 line triangle")
+    println("### For a 15 line triangle")
     print("For parsing ")
     val input = time { readFromFile("testData/15.txt") }
     Triangle(input) match {
-      case t @ TriangleNode(_, _, _) => 
+      case t @ TriangleNode(_, _, _) =>
         print("For solution ")
         val res = time { Triangle.findMinPath(t) }
         res shouldEqual List(74, 54, 80, 32, 23, 43, 51, 18, 31, 33, 25, 12, 18, 11, 35) // = 540
@@ -63,17 +63,47 @@ class ParseSpec extends AnyFlatSpec with Matchers {
     }
   }
 
+  "Triangle.findMinPath" should "work as expected even for a 15 line input -2" in {
+    println("### For a 15 line triangle - 2")
+    print("For parsing ")
+    val input = time { readFromFile("testData/15-2.txt") }
+    Triangle(input) match {
+      case t @ TriangleNode(_, _, _) =>
+        print("For solution ")
+        val res = time { Triangle.findMinPath(t) }
+        res shouldEqual  List(74, 39, 1, 1, 1, 1, 1, 2, 3, 4, 5, 6, 7, 20, 9) // = 174
+      case _ =>
+        fail("Parsing error")
+    }
+  }
+
   "Triangle.findMinPath" should "work as expected even for a 25 line input" in {
-    println("For a 25 line triangle")
+    println("### For a 25 line triangle")
     print("For parsing ")
     val input = time { readFromFile("testData/25.txt") }
     Triangle(input) match {
-      case t @ TriangleNode(_, _, _) => 
+      case t @ TriangleNode(_, _, _) =>
         print("For solution ")
         val res = time { Triangle.findMinPath(t) }
         res shouldEqual List(
           74, 54, 80, 32, 23, 43, 51, 18, 31, 33, 25, 12, 18, 11, 35, 16, 12, 30, 14, 39, 77, 11, 79, 12, 30
         ) // = 860
+      case _ =>
+        fail("Parsing error")
+    }
+  }
+
+  "Triangle.findMinPath" should "work as expected even for a 28 line input" in {
+    println("### For a 28 line triangle")
+    print("For parsing ")
+    val input = time { readFromFile("testData/28.txt") }
+    Triangle(input) match {
+      case t @ TriangleNode(_, _, _) =>
+        print("For solution ")
+        val res = time { Triangle.findMinPath(t) }
+        res shouldEqual List(
+          74, 54, 80, 32, 23, 43, 51, 18, 31, 33, 25, 12, 18, 11, 35, 16, 12, 30, 14, 39, 77, 11, 79, 12, 30, 63, 37, 13
+        ) // = 973
       case _ =>
         fail("Parsing error")
     }
