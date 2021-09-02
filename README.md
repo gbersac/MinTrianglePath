@@ -1,5 +1,7 @@
 # MinTrianglePath
 
+This is the solution to the exercise which you can find the description in `exercise_triangle.pdf`
+
 How to run the application:
 
 1- Git clone the repository on your computer
